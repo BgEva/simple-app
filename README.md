@@ -78,6 +78,7 @@ ansible-playbook -i ansible/inventory.ini ansible/playbook.yml -vvv
 ## Project Structure
 
 
+```
 simple-app/
 ├── app/                    # Application and tests
 │   ├── main.py             # REST API
@@ -96,7 +97,7 @@ simple-app/
 ├── docker-compose.yml      # Local deployment
 ├── Makefile                # Project commands
 └── README.md               # Documentation
-
+```
 
 ## Troubleshooting
 
