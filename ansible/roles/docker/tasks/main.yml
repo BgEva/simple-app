@@ -1,0 +1,46 @@
+# ==== CentOs / RedHat ====
+- name: Update cache and install Docker (CentOS)
+  when: ansible_os_family == "RedHat"
+  block:
+    - name: Update dnf cache
+      dnf:
+        update_cache: yes
+
+    - name: Install Docker
+      package:
+        name: docker-ce
+        state: present
+
+    - name: Install Docker Compose plugin
+      package:
+        name: docker-compose-plugin
+        state: present
+
+# ==== Debian / Ubuntu ====
+
+- name: Update cache and install Docker (Debian)
+  when: ansible_os_family == "Debian"
+  block:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      
+    - name: Install Docker
+      package:
+        name: docker.io
+        state: present
+
+    - name: Install Docker compose
+      package:
+        name: docker-compose
+        state: present
+
+# ==== Common ====
+  
+- name: Start Docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+
+
