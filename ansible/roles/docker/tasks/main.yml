@@ -10,11 +10,13 @@
       package:
         name: docker-ce
         state: present
+      notify: Restart Docker
 
     - name: Install Docker Compose plugin
       package:
         name: docker-compose-plugin
         state: present
+     
 
 # ==== Debian / Ubuntu ====
 
@@ -29,6 +31,7 @@
       package:
         name: docker.io
         state: present
+      notify: Restart Docker
 
     - name: Install Docker compose
       package:
