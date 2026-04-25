@@ -64,9 +64,12 @@ check_services() {
 
     for url in "$@"; do
         echo -n "[CHECK] $url ... "
-        local start=$(date +%s%3N)
-        local status=$(curl -s -o /dev/null -w "%{http_code}" -L --connect-timeout 5 "$url" 2>/dev/null)
-        local end=$(date +%s%3N)
+        local start
+        start=$(date +%s%3N)
+        local status
+        status=$(curl -s -o /dev/null -w "%{http_code}" -L --connect-timeout 5 "$url" 2>/dev/null)
+        local end
+        end=$(date +%s%3N)
         local time_ms=$((end - start))
 
         if [[ "$status" == "200" ]]; then

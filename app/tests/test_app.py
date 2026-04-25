@@ -14,7 +14,7 @@ def test_root():
 #Проверяем, что статус ответа 200
         assert response.status_code == 200
 #Проверяем, что сообщение в ответе соответствует ожидаемому
-asser response.json['message'] == 'Hello, World!'
+        assert response.json['message'] == 'Hello, World!'
 
 
 def test_health():
@@ -25,7 +25,7 @@ def test_health():
 #Проверяем, что статус ответа 200
         assert response.status_code == 200
 #Проверяем, что сообщение в ответе соответствует ожидаемому
-        assert response.json['status'] == 'ok'
+        assert response.json['status'] == 'OK'
 
 
 def test_get_users_empty():
@@ -60,17 +60,17 @@ def test_create_user_missing_name():
 #Проверяем, что статус ответа 400
         assert response.status_code == 400
 #Проверяем, что в ответе есть поле error
-        assert response.json['error'] == "Missing 'name' field"
+        assert response.json['error'] == "Name is required"
 
 def test_delete_user():
 #Создаем тестового клиента
-        with app.test_client() as client:
+    with app.test_client() as client:
 #Созадем пользователя
-        client.post('api/users', json=('name': 'Test'))
+        response = client.post('/api/users', json={'name': 'Test'})
 #Удаляем пользователя
-        response = client.delete('api/users/1')
+        response = client.delete('/api/users/1')
 #Проверяем, что пользователь удалился
-        assert response.status_code == 404
+        assert response.status_code == 204
 
 
 

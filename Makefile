@@ -21,8 +21,23 @@ server-info: ## Run server diagnostics
 docker-build: ## Build Docker image
 	docker build -t simple-app:latest .
 
+docker-run: ## Run Docker container
+	docker run -d -p 5000:5000 --name simple-app simple-app:latest
+
 compose-up: ## Start Docker compose
 	docker compose up -d
 
 compose-down: ## Stop Docker compose
 	docker compose down
+
+compose-logs: ## View Docker compose logs
+	docker compose logs -f
+
+ansible-check: ## Check Ansible syntax
+	ansible-playbook --syntax-check -i ansible/inventory.ini ansible/playbook.yml
+
+ansible-dry: ## Dry run Ansible
+	ansible-playbook -i ansible/inventory.ini ansible/playbook.yml --check
+
+ansible-run: ## Run Ansible playbook
+	ansible-playbook -i ansible/inventory.ini ansible/playbook.yml
